@@ -194,35 +194,37 @@ const VideoCarousel = () => {
         ))}
       </div>
 
-      <div className="relative flex-center mt-10">
-        <div className="flex-center py-5 px-7 bg-gray-300 backdrop-blur rounded-full">
-          {videoRef.current.map((_, i) => (
-            <span
-              key={i}
-              className="mx-2 w-3 h-3 bg-gray-200 rounded-full relative cursor-pointer"
-              ref={(el) => (videoDivRef.current[i] = el)}
-            >
+      <div className="h-full z-10 w-full flex justify-center items-end absolute left-0 top-0">
+        <div className="sticky bottom-[30px] z-1 items-center flex mb-[75px] mt-[150px]">
+          <div className="relative flex-center py-5 px-7 bg-gray-300 backdrop-blur rounded-full">
+            {videoRef.current.map((_, i) => (
               <span
-                className="absolute h-full w-full rounded-full"
-                ref={(el) => (videoSpanRef.current[i] = el)}
-              />
-            </span>
-          ))}
-        </div>
+                key={i}
+                className="mx-2 w-3 h-3 bg-gray-200 rounded-full relative cursor-pointer"
+                ref={(el) => (videoDivRef.current[i] = el)}
+              >
+                <span
+                  className="absolute h-full w-full rounded-full"
+                  ref={(el) => (videoSpanRef.current[i] = el)}
+                />
+              </span>
+            ))}
+          </div>
 
-        <button className="control-btn">
-          <img
-            src={isLastVideo ? replayImg : !isPlaying ? playImg : pauseImg}
-            alt={isLastVideo ? "replay" : !isPlaying ? "play" : "pause"}
-            onClick={
-              isLastVideo
-                ? () => handleProcess("video-reset")
-                : !isPlaying
-                ? () => handleProcess("play")
-                : () => handleProcess("pause")
-            }
-          />
-        </button>
+          <button className="control-btn">
+            <img
+              src={isLastVideo ? replayImg : !isPlaying ? playImg : pauseImg}
+              alt={isLastVideo ? "replay" : !isPlaying ? "play" : "pause"}
+              onClick={
+                isLastVideo
+                  ? () => handleProcess("video-reset")
+                  : !isPlaying
+                  ? () => handleProcess("play")
+                  : () => handleProcess("pause")
+              }
+            />
+          </button>
+        </div>
       </div>
     </>
   );

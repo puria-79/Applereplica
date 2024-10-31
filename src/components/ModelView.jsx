@@ -37,7 +37,6 @@ const ModelView = ({ index, groupRef, gsapType, controlRef, setRotationState, si
           size={size}
         />
       </Suspense>
-
       </group>
 
     </View>
