@@ -93,9 +93,9 @@ const Model = () => {
               <View.Port />
             </Canvas>
           </div>
-          <div className="mx-auto w-full">
+          <div className="flex justify-center sticky bottom-[30px] mt-[100px]">
             <p className="text-sm font-light text-center mb-5">
-              {model.title}
+              <span className="flex justify-center gap-1 p-1 backdrop-blur bg-gray-300 rounded-full">{model.title}</span>
               <div className="flex-center mt-5">
                 <ul className="color-container">
                   {models.map((item, i) => (
