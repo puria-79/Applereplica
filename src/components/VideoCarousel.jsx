@@ -1,11 +1,12 @@
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
-gsap.registerPlugin(ScrollTrigger);
 import { useEffect, useRef, useState } from "react";
+import InteractiveControls from './InteractiveControls'
 
 import { hightlightsSlides } from "../constants";
 import { pauseImg, playImg, replayImg } from "../utils";
+gsap.registerPlugin(ScrollTrigger);
 
 const VideoCarousel = () => {
   const videoRef = useRef([]);
@@ -195,38 +196,20 @@ const VideoCarousel = () => {
         ))}
       </div>
 
-      <div className="h-[130vh] z-10 w-full flex justify-center items-end absolute left-0 top-0">
-        <div className="sticky bottom-[30px] z-1 items-center flex mb-[75px] mt-[450px]">
-          <div className="relative flex-center py-5 px-7 bg-gray-300 backdrop-blur rounded-full">
-            {videoRef.current.map((_, i) => (
-              <span
-                key={i}
-                className="mx-2 w-3 h-3 bg-gray-200 rounded-full relative cursor-pointer"
-                ref={(el) => (videoDivRef.current[i] = el)}
-              >
-                <span
-                  className="absolute h-full w-full rounded-full"
-                  ref={(el) => (videoSpanRef.current[i] = el)}
-                />
-              </span>
-            ))}
-          </div>
-
-          <button className="control-btn">
-            <img
-              src={isLastVideo ? replayImg : !isPlaying ? playImg : pauseImg}
-              alt={isLastVideo ? "replay" : !isPlaying ? "play" : "pause"}
-              onClick={
-                isLastVideo
-                  ? () => handleProcess("video-reset")
-                  : !isPlaying
-                  ? () => handleProcess("play")
-                  : () => handleProcess("pause")
-              }
-            />
-          </button>
-        </div>
-      </div>
+      <InteractiveControls
+        id="videoCarousel"
+        props={{ 
+            videoRef: videoRef,
+            videoDivRef: videoDivRef,
+            videoSpanRef: videoSpanRef,
+            isLastVideo: isLastVideo,
+            replayImg: replayImg,
+            isPlaying: isPlaying,
+            playImg: playImg,
+            pauseImg: pauseImg,
+            handleProcess: handleProcess
+          }}
+      />
     </>
   );
 };
