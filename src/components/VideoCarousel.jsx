@@ -35,6 +35,7 @@ const VideoCarousel = () => {
       scrollTrigger: {
         trigger: "#video",
         toggleActions: "restart none none none",
+        start: 'top 60%',
       },
       onComplete: () => {
         setVideo((pre) => ({
@@ -194,8 +195,8 @@ const VideoCarousel = () => {
         ))}
       </div>
 
-      <div className="h-full z-10 w-full flex justify-center items-end absolute left-0 top-0">
-        <div className="sticky bottom-[30px] z-1 items-center flex mb-[75px] mt-[150px]">
+      <div className="h-[130vh] z-10 w-full flex justify-center items-end absolute left-0 top-0">
+        <div className="sticky bottom-[30px] z-1 items-center flex mb-[75px] mt-[450px]">
           <div className="relative flex-center py-5 px-7 bg-gray-300 backdrop-blur rounded-full">
             {videoRef.current.map((_, i) => (
               <span

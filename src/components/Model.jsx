@@ -47,7 +47,15 @@ const Model = () => {
   }, [size])
 
   useGSAP(() => {
-    gsap.to('#heading', { y:0, opacity: 1})
+    gsap.to('#heading', {
+      y:0,
+      opacity: 1,
+      duration: 1,
+      scrollTrigger: {
+        trigger: '#heading',
+        start: 'top 95%'
+      }
+    })
   })
 
   return (
@@ -93,25 +101,27 @@ const Model = () => {
               <View.Port />
             </Canvas>
           </div>
-          <div className="flex justify-center sticky bottom-[30px] mt-[100px]">
-            <p className="text-sm font-light text-center mb-5">
-              <span className="flex justify-center gap-1 p-1 backdrop-blur bg-gray-300 rounded-full">{model.title}</span>
-              <div className="flex-center mt-5">
-                <ul className="color-container">
-                  {models.map((item, i) => (
-                    <li key={i} className="w-6 h-6 rounded-full mx-2 cursor-pointer active:border-2" style={{backgroundColor: item.color[0] }} onClick={() => setModel(item)} />
-                  ))}
-                </ul>
+          <div className="absolute bottom-0 flex justify-center items-end left-0 w-full h-[110vh]">
+            <div className="flex justify-center sticky bottom-[30px] mt-[100px]">
+              <p className="text-sm font-light text-center mb-5">
+                <span className="flex justify-center gap-1 p-1 backdrop-blur bg-gray-300 rounded-full">{model.title}</span>
+                <div className="flex-center mt-5">
+                  <ul className="color-container">
+                    {models.map((item, i) => (
+                      <li key={i} className="w-6 h-6 rounded-full mx-2 cursor-pointer active:border-2" style={{backgroundColor: item.color[0] }} onClick={() => setModel(item)} />
+                    ))}
+                  </ul>
 
-                <button className="size-btn-container">
-                  {sizes.map(({ label, value}) => (
-                    <span key={label} className="size-btn" style={{backgroundColor: size === value ? 'white' : 'transparent', color: size === value ? 'black' : 'white'}} onClick={() => setSize(value)}>
-                      {label}
-                    </span>
-                  ))}
-                </button>
-              </div>
-            </p>
+                  <button className="size-btn-container">
+                    {sizes.map(({ label, value}) => (
+                      <span key={label} className="size-btn" style={{backgroundColor: size === value ? 'white' : 'transparent', color: size === value ? 'black' : 'white'}} onClick={() => setSize(value)}>
+                        {label}
+                      </span>
+                    ))}
+                  </button>
+                </div>
+              </p>
+            </div>
           </div>
         </div>
       </div>

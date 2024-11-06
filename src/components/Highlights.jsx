@@ -1,12 +1,30 @@
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
+import { ScrollTrigger } from "gsap/all"
 import {rightImg, watchImg} from "../utils"
 import VideoCarousel from "./VideoCarousel"
+gsap.registerPlugin(ScrollTrigger)
 
 const Highlights = () => {
   useGSAP(() => {
-    gsap.to('#title', {opacity: 1, y: 0})
-    gsap.to('.link', {opacity:1, y:0, duration:1, stagger: 0.25})
+    gsap.to('#title', {
+      opacity: 1,
+      y: 0,
+      scrollTrigger: {
+        trigger: '#title',
+        start: 'top 95%'
+      }
+    })
+    gsap.to('.link', {
+      opacity:1,
+      y:0,
+      duration:1,
+      stagger: 0.25,
+      scrollTrigger: {
+        trigger: '.link',
+        start: 'top 95%'
+      }
+    })
   }, [])
   return (
     <section id="highlights" className="w-screen h-full common-padding bg-zinc">
