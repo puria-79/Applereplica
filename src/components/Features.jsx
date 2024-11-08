@@ -9,12 +9,22 @@ gsap.registerPlugin(ScrollTrigger)
 const Features = () => {
   const videoRef = useRef();
 
-  useGSAP(
-    () => {
-      animationWithGsap('#features_title', {y:0, opacity:1})
-      animationWithGsap('.g_grow', {scale: 1, opacity: 1, ease: 'power1'}, {scrub: 5.5})
-      animationWithGsap('.g_text', { y: 0, opacity: 1, ease: 'power2.inOut', duration: 1})
-    }, [])
+  useGSAP(() => {
+    gsap.to('#exploreVideo', {
+      scrollTrigger: {
+        trigger: '#exploreVideo',
+        toggleActions: 'play pause reverse restart',
+        start: '-10% bottom'
+      },
+      onComplete: () => {
+        videoRef.current.play();
+      }
+    })
+    animationWithGsap('#features_title', {y:0, opacity:1})
+    animationWithGsap('.g_grow', {scale: 1, opacity: 1, ease: 'power1'}, {scrub: 5.5})
+    animationWithGsap('.g_text', { y: 0, opacity: 1, ease: 'power2.inOut', duration: 1})
+  }, [])
+
   useGSAP(() => {
     gsap.from('#features_head', {
       y:60,

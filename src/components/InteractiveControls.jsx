@@ -1,9 +1,11 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import { useRef } from "react";
 gsap.registerPlugin(ScrollTrigger)
 
 const InteractiveControls = ({id, props}) => {
+  const tl = useRef();
   useGSAP(() => {
     gsap.to('.z-1', {
       position: 'fixed',
@@ -14,21 +16,23 @@ const InteractiveControls = ({id, props}) => {
         fastScrollEnd: 750,
         trigger: '#videocarousel',
         toggleActions: 'restart reverse restart reverse',
-        start: 'top 50%',
+        start: '55% bottom',
         end: 'bottom 70%'
       }
     })
+  }, [])
+  useGSAP(() => {
     gsap.to('.z-2', {
       position: 'fixed',
       y: -20,
       scale: 1,
       ease: 'back',
       scrollTrigger: {
-        fastScrollEnd: 750,
+        fastScrollEnd: 800,
         trigger: '#model',
         toggleActions: 'restart reverse restart reverse',
-        start: 'top 90%',
-        end: 'bottom 85%'
+        start: '10% bottom',
+        end: '30% top'
       }
     })
   }, [])
@@ -36,7 +40,7 @@ const InteractiveControls = ({id, props}) => {
     <>
       {id === 'videoCarousel' ? 
         <div id="videocarousel" className="h-[100vh] w-full flex justify-center items-end absolute left-0 top-0">
-            <div className="scale-0 bottom-[0px] z-1 items-center flex">
+          <div className="z-1 scale-0 bottom-[0px] items-center flex">
               <div className="relative flex-center py-5 px-7 bg-gray-300 backdrop-blur rounded-full">
                 {props.videoRef.current.map((_, i) => (
                   <span
@@ -45,6 +49,7 @@ const InteractiveControls = ({id, props}) => {
                     ref={(el) => (props.videoDivRef.current[i] = el)}
                   >
                     <span
+                      key={i}
                       className="absolute h-full w-full rounded-full element"
                       ref={(el) => (props.videoSpanRef.current[i] = el)}
                     />
@@ -90,7 +95,7 @@ const InteractiveControls = ({id, props}) => {
               </p>
             </div>
         </div> :
-        <div>hi</div>
+        <div></div>
       }
     </>
   )
